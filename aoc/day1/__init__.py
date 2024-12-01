@@ -13,10 +13,9 @@ def puzzle1(input: str) -> None:
 
 def puzzle2(input: str) -> None:
     l1, l2 = get_lists(input)
-    counts = {v: 0 for v in l1}
+    values = set(l1)
+    result = 0
     for value in l2:
-        try:
-            counts[value] += 1
-        except KeyError:
-            continue
-    print(sum([k * v for k, v in counts.items()]))
+        if value in values:
+            result += value
+    print(result)
