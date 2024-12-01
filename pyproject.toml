@@ -1,0 +1,12 @@
+[tool.poetry]
+name = "aoc"
+version = "0.0.24"
+description = "Advent of Code"
+authors = ["Alec Gunny"]
+
+[tool.poetry.scripts]
+aoc = "aoc.__main__:cli"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "^2.32.3"
