@@ -14,8 +14,4 @@ def puzzle1(input: str) -> None:
 def puzzle2(input: str) -> None:
     l1, l2 = get_lists(input)
     values = set(l1)
-    result = 0
-    for value in l2:
-        if value in values:
-            result += value
-    print(result)
+    print(sum([i for i in l2 if i in values]))
