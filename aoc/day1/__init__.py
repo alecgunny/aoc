@@ -2,7 +2,7 @@ __all__ = ["puzzle1", "puzzle2"]
 
 
 def get_lists(input: str) -> tuple[list[int], list[int]]:
-    lists = zip(*[(j for j in i.split() if j) for i in input.splitlines() if i])
+    lists = zip(*[i.split() for i in input.strip().splitlines()])
     return tuple([sorted(map(int, i)) for i in lists])
 
 
