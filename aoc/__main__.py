@@ -14,8 +14,8 @@ def main(day: int, puzzle: int) -> None:
 
 def cli(args: list[str] | None = None) -> None:
     parser = ArgumentParser(prog="Advent of Code")
-    parser.add_argument("day", type=int)
-    parser.add_argument("puzzle", type=int, choices=[1, 2])
+    parser.add_argument("day", type=int, help="Day of the advent calendar to solve")
+    parser.add_argument("puzzle", type=int, choices=[1, 2], help="Which of the two daily puzzles to solve")
     flags = parser.parse_args(args)
     return main(flags.day, flags.puzzle)
 
