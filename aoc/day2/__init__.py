@@ -1,3 +1,5 @@
+from aoc.utils import parse_input
+
 __all__ = ["puzzle1", "puzzle2"]
 
 
@@ -11,13 +13,15 @@ def check_row(row: list[int]) -> bool:
     return all([1 <= abs(i) <= 3 for i in diffs]) and all([(i > 0) == sign for i in diffs])
 
 
-def puzzle1(input: str) -> None:
-    print(len(list(filter(check_row, get_report(input)))))
+@parse_input(get_report)
+def puzzle1(report: list[list[int]]) -> int:
+    return len(list(filter(check_row, report)))
 
 
-def puzzle2(input: str) -> None:
+@parse_input(get_report)
+def puzzle2(report: list[list[int]]) -> int:
     count = 0
-    for row in get_report(input):
+    for row in report:
         if check_row(row):
             count += 1
             continue
@@ -25,4 +29,4 @@ def puzzle2(input: str) -> None:
             if check_row(row[:i] + row[i + 1:]):
                 count += 1
                 break
-    print(count)
+    return count

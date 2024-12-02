@@ -1,3 +1,5 @@
+from aoc.utils import parse_input
+
 __all__ = ["puzzle1", "puzzle2"]
 
 
@@ -6,12 +8,12 @@ def get_lists(input: str) -> tuple[list[int], list[int]]:
     return tuple([sorted(map(int, i)) for i in lists])
 
 
-def puzzle1(input: str) -> None:
-    l1, l2 = get_lists(input)
-    print(sum([abs(i - j) for i, j in zip(l1, l2)]))
+@parse_input(get_lists)
+def puzzle1(l1: list[int], l2: list[int]) -> int:
+    return sum([abs(i - j) for i, j in zip(l1, l2)])
 
 
-def puzzle2(input: str) -> None:
-    l1, l2 = get_lists(input)
+@parse_input(get_lists)
+def puzzle2(l1: list[int], l2: list[int]) -> int:
     values = set(l1)
-    print(sum([i for i in l2 if i in values]))
+    return sum([i for i in l2 if i in values])
