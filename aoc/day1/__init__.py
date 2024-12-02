@@ -5,12 +5,12 @@ __all__ = ["puzzle1", "puzzle2"]
 
 def get_lists(input: str) -> tuple[list[int], list[int]]:
     lists = zip(*[i.split() for i in input.strip().splitlines()])
-    return tuple([sorted(map(int, i)) for i in lists])
+    return tuple([list(map(int, i)) for i in lists])
 
 
 @parse_input(get_lists)
 def puzzle1(l1: list[int], l2: list[int]) -> int:
-    return sum([abs(i - j) for i, j in zip(l1, l2)])
+    return sum([abs(i - j) for i, j in zip(sorted(l1), sorted(l2))])
 
 
 @parse_input(get_lists)
