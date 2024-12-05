@@ -7,8 +7,20 @@ from typing import TypeVar
 T = TypeVar("T")
 
 
+def cache_response(func):
+    cache_dir = ".cache"
+    os.makedirs(cache_dir, exist_ok=True)
+    cache_file = os.path.join(cache_dir, "{year}_{day}.txt")
+
+
 @cache
 def get_input(year: int, day: int) -> str:
+    cache_dir = ".cache"
+    cache_file = os.path.join(cache_dir, f"{year}_{day}.txt")
+    if os.path.exists(cache_file):
+        with open(cache_file, "r") as f:
+            return f.read()
+
     cookie = os.environ.get("AOC_COOKIE")
     if cookie is None:
         raise EnvironmentError("Must specify AOC_COOKIE environment variable")
@@ -16,7 +28,12 @@ def get_input(year: int, day: int) -> str:
         f"https://adventofcode.com/{year}/day/{day}/input", cookies={"session": cookie}
     )
     response.raise_for_status()
-    return response.content.decode()
+    input = response.content.decode()
+
+    os.makedirs(cache_dir, exist_ok=True)
+    with open(cache_file, "w") as f:
+        f.write(input)
+    return input
 
 
 def parse_input(
