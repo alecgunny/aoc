@@ -5,7 +5,9 @@ from aoc.__main__ import main
 
 answers = {
     1: [2344935, 27647262],
-    2: [213, 285]
+    2: [213, 285],
+    3: [166905464, 72948684],
+    4: [2569, 1998]
 }
 
 def test_answers_correct():
