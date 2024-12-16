@@ -124,6 +124,11 @@ class Warehouse:
     def score(self) -> int:
         return sum([100 * i.y + i.x for i, j in self if j == self._score_character])
 
+    def solve(self, sequence: str) -> int:
+        for move in sequence:
+            self.move(move)
+        return self.score()
+
     def __str__(self) -> str:
         return "\n".join(["".join(i) for i in self.map])
 
@@ -199,15 +204,9 @@ def get_map_and_sequence(input: str) -> tuple[list[list[str]], str]:
 
 @parse_input(get_map_and_sequence)
 def puzzle1(grid: list[list[str]], sequence: str) -> int:
-    warehouse = Warehouse(grid)
-    for step in sequence:
-        warehouse.move(step)
-    return warehouse.score()
+    return Warehouse(grid).solve(sequence)
 
 
 @parse_input(get_map_and_sequence)
 def puzzle2(grid: list[list[str]], sequence: str) -> int:
-    warehouse = WideWarehouse(grid)
-    for step in sequence:
-        warehouse.move(step)
-    return warehouse.score()
+    return WideWarehouse(grid).solve(sequence)
